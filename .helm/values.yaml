@@ -1,0 +1,13 @@
+replicas: 5
+appName: grok-py
+port: 8000
+image: ""
+healthCheckPath: /health
+
+#default environment - this should be override by ci
+env: "staging"
+
+host: api.jeet.so
+
+#secrets - this should be override by ci
+

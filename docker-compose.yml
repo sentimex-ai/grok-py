@@ -1,0 +1,26 @@
+version: "3.8"
+
+services:
+  pygrok:
+    build: .
+    image: grok-py-service:latest
+    # don’t publish to the host—only internal
+    expose:
+      - "8000"
+    networks:
+      - grok-net
+
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "8000:80"            # host 8000 → nginx 80
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - pygrok
+    networks:
+      - grok-net
+
+networks:
+  grok-net:
+    driver: bridge
