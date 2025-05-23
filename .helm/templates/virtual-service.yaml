@@ -10,7 +10,7 @@ spec:
   http:
     - match:
         - uri:
-            regex: "/internal/grok-py.*"
+            regex: "/*"
           sourceNamespace: "n8n"
       route:
         - destination:
@@ -19,7 +19,7 @@ spec:
             host: {{ .Values.appName }}
     - match:
         - uri:
-            regex: "/(private|public|secure)/grok-py.*"
+            regex: "/*"
       route:
         - destination:
             port:
