@@ -24,7 +24,7 @@ jobs:
 
 
       - name: Build image and Push to grok-py Prod
-        uses: jeetdotso/git-action-do-build-push@v1.3
+        uses: jeetdotso/git-action-do-build-push@v1.4
         if: ${{ steps.vars.outputs.branch == env.PRODUCTION_BRANCH }}
         with:
           do-access-token: ${{ secrets.DO_ACCESS_TOKEN }}
