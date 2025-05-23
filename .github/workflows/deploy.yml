@@ -28,7 +28,7 @@ jobs:
         if: ${{ steps.vars.outputs.branch == env.PRODUCTION_BRANCH }}
         with:
           do-access-token: ${{ secrets.DO_ACCESS_TOKEN }}
-          image-name: ${{ env.IMAGE_NAME }}
+          image-name: dealswap-registry/${{ env.IMAGE_NAME }}
           image-version: ${{ steps.vars.outputs.sha_short }}-production
 
       - name: Deploy to production k8s
@@ -37,7 +37,7 @@ jobs:
         with:
           exec: >
             helm upgrade ${{ env.IMAGE_NAME }}-release
-            --set image.repository=registry.digitalocean.com/dealswap-registry/${{ env.IMAGE_NAME }}:${{ steps.vars.outputs.sha_short }}-production
+            --set image=registry.digitalocean.com/dealswap-registry/${{ env.IMAGE_NAME }}:${{ steps.vars.outputs.sha_short }}-production
             --set env=production
             --set host=jkbapi.app
             --set gateway='istio-ingress/istio-gateway'
