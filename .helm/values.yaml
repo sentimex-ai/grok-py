@@ -1,6 +1,6 @@
 replicas: 5
 appName: grok-py
-port: 8000
+port: 9090
 image: ""
 healthCheckPath: /health
 
