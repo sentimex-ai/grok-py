@@ -1,0 +1,44 @@
+apiVersion: networking.istio.io/v1
+kind: VirtualService
+metadata:
+  name: {{ .Values.appName }}-virtual-service
+spec:
+  hosts:
+    - "*"
+  gateways:
+    - {{ .Values.gateway }}
+  http:
+    - match:
+        - uri:
+            regex: "/internal/grok-py.*"
+          sourceNamespace: "n8n"
+      route:
+        - destination:
+            port:
+              number: 80
+            host: {{ .Values.appName }}
+    - match:
+        - uri:
+            regex: "/(private|public|secure)/grok-py.*"
+      route:
+        - destination:
+            port:
+              number: 80
+            host: {{ .Values.appName }}
+      corsPolicy:
+        allowOrigins:
+          - regex: ".*"
+        allowMethods:
+          - POST
+          - GET
+          - PUT
+          - DELETE
+          - PATCH
+          - OPTIONS
+          - CONNECT
+          - HEAD
+          - TRACE
+        allowCredentials: true
+        allowHeaders:
+          - "*"
+        maxAge: "24h"
