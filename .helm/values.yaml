@@ -6,7 +6,7 @@ healthCheckPath: /health
 
 #default environment - this should be override by ci
 env: "staging"
-
+gateway: "istio-system/istio-ingressgateway"
 host: jkbapi.app
 
 #secrets - this should be override by ci
