@@ -4,13 +4,13 @@ metadata:
   name: {{ .Values.appName }}-virtual-service
 spec:
   hosts:
-    - "*"
+    - {{ .Values.host }}
   gateways:
     - {{ .Values.gateway }}
   http:
     - match:
         - uri:
-            regex: "/*"
+            regex: "/internal/review.*"
           sourceNamespace: "n8n"
       route:
         - destination:
@@ -19,7 +19,7 @@ spec:
             host: {{ .Values.appName }}
     - match:
         - uri:
-            regex: "/*"
+            regex: "/(private|public)/review.*"
       route:
         - destination:
             port:
