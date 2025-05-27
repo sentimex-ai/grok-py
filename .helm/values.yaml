@@ -1,4 +1,4 @@
-replicas: 8
+replicas: 5
 appName: grok-py
 port: 9090
 image: ""
