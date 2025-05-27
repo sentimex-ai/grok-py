@@ -6,7 +6,7 @@ import uvicorn
 from grok import GrokClient
 
 app = FastAPI()
-
+grok_prefix = "/grok"
 # Request models
 class CreateConversationRequest(BaseModel):
     """
@@ -75,8 +75,7 @@ def get_client(auth_token: str, ct0: str, proxy: Optional[str] = None) -> GrokCl
     """Internal helper to initialize authenticated GrokClient"""
     return GrokClient(auth_token=auth_token, ct0=ct0, proxy=proxy, max_retries=5)
 
-@app.post(
-    "/create_conversation",
+@app.post(f"{grok_prefix}/create_conversation",
     response_model=GrokResponse,
     summary="Create New Conversation",
     response_description="Returns new conversation ID",
@@ -120,8 +119,7 @@ async def create_conversation(data: CreateConversationRequest):
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-@app.post(
-    "/send_message",
+@app.post(f"{grok_prefix}/send_message",
     response_model=GrokResponse,
     summary="Send Message",
     response_description="Returns Grok's response",
@@ -184,8 +182,7 @@ async def send_message(data: SendMessageRequest):
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-@app.get(
-    "/conversation_history",
+@app.get(f"{grok_prefix}/conversation_history",
     response_model=GrokResponse,
     summary="Get Conversation History",
     response_description="Returns full message history",
@@ -222,8 +219,7 @@ async def get_conversation_history(auth_token: str, ct0: str, conversation_id: s
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-@app.get(
-    "/generate_transaction_id",
+@app.get(f"{grok_prefix}/generate_transaction_id",
     response_model=GrokResponse,
     summary="Generate X-Client-Transaction ID",
     response_description="Returns generated transaction ID",
@@ -275,7 +271,9 @@ async def generate_transaction_id(
         raise HTTPException(status_code=500, detail=str(e))
     
 
-@app.get("/health")
+
+
+@app.get(f"{grok_prefix}/health")
 async def health_check():
     """Health check endpoint"""
     return {"success": True, "status": "ok"}

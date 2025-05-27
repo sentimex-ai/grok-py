@@ -1,16 +1,17 @@
-apiVersion: networking.istio.io/v1alpha3
+apiVersion: networking.istio.io/v1beta1
+
 kind: VirtualService
 metadata:
   name: {{ .Values.appName }}-virtual-service
 spec:
   hosts:
-    - "*"
+    - {{ .Values.host }}
   gateways:
     - {{ .Values.gateway }}
   http:
     - match:
         - uri:
-            regex: "/*"
+            regex: "/grok.*"
           sourceNamespace: "n8n"
       route:
         - destination:
@@ -19,7 +20,7 @@ spec:
             host: {{ .Values.appName }}
     - match:
         - uri:
-            regex: "/*"
+            regex: "/grok.*"
       route:
         - destination:
             port:

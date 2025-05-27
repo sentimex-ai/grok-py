@@ -2,7 +2,7 @@ replicas: 5
 appName: grok-py
 port: 9090
 image: ""
-healthCheckPath: /health
+healthCheckPath: /grok/health
 
 #default environment - this should be override by ci
 env: "staging"
