@@ -124,7 +124,7 @@ class GrokClient:
         """Create a new Grok conversation"""
         return self._request(
             "POST",
-            "https://x.com/i/api/1.1/graphql/vvC5uy7pWWHXS2aDi1FZeA/CreateGrokConversation",
+            "https://x.com/i/api/graphql/vvC5uy7pWWHXS2aDi1FZeA/CreateGrokConversation",
             json={
                 "variables": {},
                 "queryId": "vvC5uy7pWWHXS2aDi1FZeA"
