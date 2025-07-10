@@ -124,7 +124,7 @@ class GrokClient:
         """Create a new Grok conversation"""
         return self._request(
             "POST",
-            "https://x.com/i/api/graphql/vvC5uy7pWWHXS2aDi1FZeA/CreateGrokConversation",
+            "https://x.com/i/api/1.1/graphql/vvC5uy7pWWHXS2aDi1FZeA/CreateGrokConversation",
             json={
                 "variables": {},
                 "queryId": "vvC5uy7pWWHXS2aDi1FZeA"
@@ -174,10 +174,9 @@ class GrokClient:
             },
             out_put="text"
         )
-
     def get_conversation_history(self, conversation_id: str) -> Optional[Dict[str, Any]]:
         """Get the history of a specific Grok conversation"""
-        url = "https://x.com/i/api/graphql/8xmpo8d_Z7qMI4BzMfHG6Q/GrokConversationItemsByRestId"
+        url = "https://x.com/i/api/graphql/1I9UlDDOLrwcZsIrzvNt5A/GrokConversationItemsByRestId"
         features = {
             "creator_subscriptions_tweet_preview_api_enabled": True,
             "premium_content_api_read_enabled": False,
@@ -201,7 +200,9 @@ class GrokClient:
             "standardized_nudges_misinfo": True,
             "tweet_with_visibility_results_prefer_gql_limited_actions_policy_enabled": True,
             "longform_notetweets_rich_text_read_enabled": True,
+            "payments_enabled": False,
             "longform_notetweets_inline_media_enabled": True,
+            "responsive_web_grok_community_note_auto_translation_is_enabled": False,
             "profile_label_improvements_pcf_label_in_post_enabled": True,
             "rweb_tipjar_consumption_enabled": True,
             "verified_phone_label_enabled": False,
