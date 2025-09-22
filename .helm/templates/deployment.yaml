@@ -28,7 +28,7 @@ spec:
             initialDelaySeconds: 10      # give it 10s to spin up
             timeoutSeconds:     10        # wait up to 10s for the HTTP check
             periodSeconds:     40        # only check every 40s
-            failureThreshold:   8        # allow 8 consecutive failures before marking “Not Ready”
+            failureThreshold:   30        # allow 30 consecutive failures before marking “Not Ready”
   strategy:
     type: RollingUpdate
     rollingUpdate:
