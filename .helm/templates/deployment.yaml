@@ -26,9 +26,9 @@ spec:
               path: {{ .Values.healthCheckPath }}
               port: {{ .Values.port }}
             initialDelaySeconds: 10      # give it 10s to spin up
-            timeoutSeconds:     5        # wait up to 5s for the HTTP check
-            periodSeconds:     20        # only check every 20s
-            failureThreshold:   5        # allow 5 consecutive failures before marking “Not Ready”
+            timeoutSeconds:     10        # wait up to 10s for the HTTP check
+            periodSeconds:     40        # only check every 40s
+            failureThreshold:   8        # allow 8 consecutive failures before marking “Not Ready”
   strategy:
     type: RollingUpdate
     rollingUpdate:
